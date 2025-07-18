@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar Abastecimento</title>
+    <style>
+        body { font-family: sans-serif; max-width: 500px; margin: 40px auto; }
+        form { padding: 15px; border: 1px solid #ccc; background-color: #f9f9f9; }
+        label { display: block; margin-top: 10px; }
+        input { width: 100%; padding: 6px; margin-top: 5px; }
+        button { margin-top: 15px; padding: 10px; width: 100%; background-color: #007bff; color: white; border: none; }
+        a { display: block; text-align: center; margin-top: 20px; color: #555; }
+    </style>
+</head>
+<body>
+    <h2>Editar Abastecimento</h2>
+    <form method="post">
+        <label>Data:</label>
+        <input type="date" name="data" value="{{ registro.data }}" required>
+
+        <label>Ônibus:</label>
+        <input name="onibus" value="{{ registro.onibus }}" required>
+
+        <label>Litros:</label>
+        <input type="number" step="0.01" name="litros" value="{{ registro.litros }}" required>
+
+        <label>Responsável:</label>
+        <input name="responsavel" value="{{ registro.responsavel }}" required>
+
+        <button type="submit">Salvar Alterações</button>
+    </form>
+    <a href="/dashboard">← Voltar ao Dashboard</a>
+</body>
+</html>

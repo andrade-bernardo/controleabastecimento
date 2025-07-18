@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard - {{ base|capitalize }}</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 700px;
+            margin: 40px auto;
+        }
+        h2, h3 {
+            text-align: center;
+        }
+        form {
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input {
+            width: 100%;
+            padding: 6px;
+            margin-top: 5px;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px;
+            width: 100%;
+            background-color: #28a745;
+            border: none;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table th, table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+        a {
+            margin-right: 10px;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .links {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h2>Controle de Abastecimento - {{ base|capitalize }}</h2>
+
+    <!-- Formulário de Registro -->
+    <form method="post">
+        <label>Data do abastecimento:</label>
+        <input type="date" name="data" required>
+
+        <label>Ônibus:</label>
+        <input name="onibus" required>
+
+        <label>Litros abastecidos:</label>
+        <input type="number" step="0.01" name="litros" required>
+
+        <label>Responsável:</label>
+        <input name="responsavel" required>
+
+        <button type="submit">Registrar</button>
+    </form>
+
+    <h3>Últimos Abastecimentos</h3>
+
+    <!-- Formulário de Filtros -->
+    <form method="get" style="background-color: #eef; padding: 10px; margin-bottom: 20px;">
+        <label>Filtrar por Data:</label>
+        <input type="date" name="filtro_data" value="{{ request.args.get('filtro_data', '') }}">
+
+        <label>Filtrar por Ônibus:</label>
+        <input name="filtro_onibus" placeholder="Número ou nome do ônibus" value="{{ request.args.get('filtro_onibus', '') }}">
+
+        <button type="submit" style="background-color: #007bff;">🔍 Aplicar Filtros</button>
+        <a href="/dashboard" style="color: red;">❌ Limpar Filtros</a>
+    </form>
+
+    <!-- Tabela de Registros -->
+    <table>
+        <tr>
+            <th>Data</th>
+            <th>Hora</th>
+            <th>Ônibus</th>
+            <th>Litros</th>
+            <th>Responsável</th>
+            <th>Ações</th>
+        </tr>
+        {% for d in dados %}
+        <tr>
+            <td>{{ d.data }}</td>
+            <td>{{ d.hora }}</td>
+            <td>{{ d.onibus }}</td>
+            <td>{{ "%.2f"|format(d.litros) }}</td>
+            <td>{{ d.responsavel }}</td>
+            <td>
+                <a href="/editar/{{ loop.index0 }}" style="color: orange;">✏️</a>
+                <a href="/excluir/{{ loop.index0 }}" onclick="return confirm('Deseja excluir?');" style="color: red;">🗑️</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <div class="links">
+        <a href="/exportar">📥 Exportar para Excel</a>
+        <a href="/logout">🔒 Sair</a>
+    </div>
+</body>
+</html>
