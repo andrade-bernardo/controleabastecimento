@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - Controle de Abastecimento</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 100px auto;
+            width: 300px;
+        }
+        label, input {
+            display: block;
+            width: 100%;
+        }
+        input {
+            margin-bottom: 10px;
+            padding: 6px;
+        }
+        button {
+            width: 100%;
+            padding: 8px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        p {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Login por Base</h2>
+
+    {% if erro %}
+        <p style="color: red;">{{ erro }}</p>
+    {% endif %}
+
+    <form method="post">
+        <label>Base:</label>
+        <input name="base" required>
+
+        <label>Senha:</label>
+        <input name="senha" type="password" required>
+
+        <button type="submit">Entrar</button>
+    </form>
+</body>
+</html>
+
