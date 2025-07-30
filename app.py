@@ -70,7 +70,9 @@ def dashboard():
 
     filtrados.sort(key=lambda x: (x["data"], x["hora"]), reverse=True)
 
-    return render_template("dashboard.html", dados=filtrados, base=base)
+    total_litros = sum(d["litros"] for d in filtrados)
+
+    return render_template("dashboard.html", dados=filtrados, base=base, total_litros=total_litros)
 
 @app.route("/editar/<int:index>", methods=["GET", "POST"])
 def editar(index):
@@ -78,14 +80,11 @@ def editar(index):
         return redirect("/")
     dados = carregar_dados()
     base = session["base"]
-
-    # Filtrar apenas os dados dessa base
     dados_base = [d for d in dados if d["base"] == base]
 
     if index >= len(dados_base):
         return "Registro não encontrado", 404
 
-    # Encontrar o índice real no JSON (original)
     real_index = [i for i, d in enumerate(dados) if d["base"] == base][index]
     registro = dados[real_index]
 
@@ -105,7 +104,6 @@ def excluir(index):
         return redirect("/")
     dados = carregar_dados()
     base = session["base"]
-
     dados_base = [d for d in dados if d["base"] == base]
 
     if index >= len(dados_base):
