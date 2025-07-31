@@ -1,0 +1,15 @@
+# Ignorar o ambiente virtual
+venv/
+
+# Ignorar a chave do Firebase
+chave_firebase.json
+
+# Ignorar arquivos de cache do Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignorar configurações locais
+.env
+.DS_Store
+*.json
