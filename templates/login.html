@@ -1,53 +1,81 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
+    <meta charset="UTF-8">
     <title>Login - Controle de Abastecimento</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
             font-family: sans-serif;
-            margin: 100px auto;
-            width: 300px;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f4f4f4;
         }
-        label, input {
-            display: block;
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
             width: 100%;
+            max-width: 320px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
         }
         input {
-            margin-bottom: 10px;
-            padding: 6px;
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
         }
         button {
             width: 100%;
-            padding: 8px;
+            padding: 10px;
             background-color: #007bff;
             color: white;
             border: none;
+            border-radius: 4px;
             cursor: pointer;
+            font-size: 16px;
         }
         button:hover {
             background-color: #0056b3;
         }
-        p {
-            margin-top: 10px;
+        .erro {
+            color: red;
+            margin-bottom: 15px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <h2>Login por Base</h2>
+    <div class="container">
+        <h2>Login por Base</h2>
 
-    {% if erro %}
-        <p style="color: red;">{{ erro }}</p>
-    {% endif %}
+        {% if erro %}
+            <div class="erro">{{ erro }}</div>
+        {% endif %}
 
-    <form method="post">
-        <label>Base:</label>
-        <input name="base" required>
+        <form method="post">
+            <label for="base">Base:</label>
+            <input id="base" name="base" required>
 
-        <label>Senha:</label>
-        <input name="senha" type="password" required>
+            <label for="senha">Senha:</label>
+            <input id="senha" name="senha" type="password" required>
 
-        <button type="submit">Entrar</button>
-    </form>
+            <button type="submit">Entrar</button>
+        </form>
+    </div>
 </body>
 </html>
-
